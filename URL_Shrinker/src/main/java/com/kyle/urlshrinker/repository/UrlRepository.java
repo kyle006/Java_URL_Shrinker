@@ -1,2 +1,4 @@
-package com.kyle.urlshrinker.repository;public class UrlRepository {
+package com.kyle.urlshrinker.repository;
+
+public class UrlRepository {
 }
