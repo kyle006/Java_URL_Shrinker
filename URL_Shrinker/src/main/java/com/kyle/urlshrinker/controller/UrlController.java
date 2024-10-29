@@ -44,4 +44,11 @@ public class UrlController {
         service.markUrlInactive(urlId);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/{urlId}/statistics")
+    public ResponseEntity<Url> getUrlStatistics(@PathVariable Long urlId) {
+        Optional<Url> optionalUrl = service.fetchUrlStatistics(urlId);
+        return optionalUrl.map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
 }

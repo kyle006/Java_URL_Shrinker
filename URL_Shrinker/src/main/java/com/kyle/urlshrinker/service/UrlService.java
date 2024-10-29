@@ -36,4 +36,8 @@ public class UrlService {
             repository.save(item);
         });
     }
+
+    public Optional<Url> fetchUrlStatistics(Long urlId) {
+        return repository.findById(urlId);
+    }
 }
