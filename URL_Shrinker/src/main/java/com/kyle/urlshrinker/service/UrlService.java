@@ -5,6 +5,7 @@ import com.kyle.urlshrinker.repository.UrlRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -17,12 +18,16 @@ public class UrlService {
         this.repository = repository;
     }
 
+    public List<Url> fetchAllUrls() {
+        return repository.findAll();
+    }
+
     public Url storeUrl(Url urlData) {
         return repository.save(urlData);
     }
 
-    public Optional<Url> fetchUrlByShortCode(String shortCode) {
-        return repository.findUrl(shortCode);
+    public Optional<Url> fetchUrlById(Long urlId) {
+        return repository.findById(urlId);
     }
 
     public void markUrlInactive(Long urlId) {

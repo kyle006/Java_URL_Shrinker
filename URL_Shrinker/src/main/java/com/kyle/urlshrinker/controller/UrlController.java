@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -25,9 +26,15 @@ public class UrlController {
         return ResponseEntity.ok(savedUrl);
     }
 
-    @GetMapping("/{shortCode}")
-    public ResponseEntity<Url> retrieveUrl(@PathVariable String shortCode) {
-        Optional<Url> optionalUrl = service.fetchUrlByShortCode(shortCode);
+    @GetMapping
+    public ResponseEntity<List<Url>> getAllUrls() {
+        List<Url> urls = service.fetchAllUrls();
+        return ResponseEntity.ok(urls);
+    }
+
+    @GetMapping("/{urlId}")
+    public ResponseEntity<Url> retrieveUrl(@PathVariable Long urlId) {
+        Optional<Url> optionalUrl = service.fetchUrlById(urlId);
         return optionalUrl.map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
